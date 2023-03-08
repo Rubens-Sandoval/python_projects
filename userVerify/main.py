@@ -67,14 +67,19 @@ class MainWindow(Screen):
         self.email.text = 'Email: ' + self.current
         self.created.text = 'Created On: ' + created
 
+    def delete_user(self):
+        db.remove_user(self.current)
+        sm.current = 'login'
+
+
 class WindowManager(ScreenManager):
     pass
 
 def invalidLogin():
-    pop = Popup(title='Invalid login')
-    content = Label(text='Invalid username or password',
-                    size_hint=(None,None),
-                    size = (400, 400))
+    pop = Popup(title='Invalid login',
+                content = Label(text='Invalid username or password'),
+                size_hint=(None,None),
+                size = (400, 400))
     pop.open()
 
 def invalidForm():

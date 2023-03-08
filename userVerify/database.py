@@ -32,6 +32,14 @@ class DataBase:
             print('Email já cadastrado!')
             return -1
 
+    def remove_user(self, email):
+        with open(self.filename, "r") as f:
+            lines = f.readlines()
+        with open(self.filename, "w") as f:
+            for line in lines:
+                if email not in line.strip("\n"):
+                    f.write(line)
+
     def validate(self, email, password):
         if self.get_user(email) != -1:
             return self.users[email][0] == password
